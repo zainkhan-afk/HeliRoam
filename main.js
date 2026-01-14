@@ -9,7 +9,7 @@ function setup()
 
 function draw()
 {
-    clear();
+    // clear();
     background(200);
     heliroam.Step();
 }

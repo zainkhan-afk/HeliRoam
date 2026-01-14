@@ -4,7 +4,7 @@ class HeliRoam{
         this.physics = new Physics();
         this.renderer = new Renderer();
 
-        this.gameObjects = [];
+        this.gameObjects = [new Player(createVector(0, 0, 100), createVector(0, 0, 0))];
     }
 
 
