@@ -1,6 +1,6 @@
 class Physics{
     constructor(){
-        this.gravity = createVector(0, 0, -0.0001);
+        this.gravity = createVector(0, 0, -10);
     }
 
     Step(dt, game_objects){

@@ -12,13 +12,13 @@ class HeliRoam{
 
 
     Step(){
-        this.physics.Step(deltaTime, this.gameObjects);
+        this.physics.Step(deltaTime/1000, this.gameObjects);
         this.renderer.Render(this.gameObjects);
     }
 
     AdjustCamera(){
         this.cam = createCamera();
-        this.cam.camera(100, 100, 100, 
+        this.cam.camera(100, 100, 40, 
                     0, 0, 0, 
                     0, 0, -1);
         // setCamera(this.cam);
