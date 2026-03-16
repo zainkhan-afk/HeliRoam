@@ -1,7 +1,8 @@
-import { createRenderer, handleResize } from "./core/renderer";
-import { createPhysicsWorld, stepPhysics } from "./core/physics";
-import { createScene } from "./core/scene";
-import { createCamera } from "./core/camera";
+
+import { createRenderer, handleResize } from "./core/renderer.js";
+import { createPhysicsWorld, stepPhysics } from "./core/physics.js";
+import { createScene } from "./core/scene.js";
+import { createCamera } from "./core/camera.js";
 
 const renderer = createRenderer();
 const scene = createScene();
