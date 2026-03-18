@@ -13,6 +13,8 @@ export class Helicopter {
 
         scene.add(this.mesh);
         world.addBody(this.body);
+
+        this.desiredAltitude = 0;
     }
 
     createMesh() {
@@ -44,11 +46,18 @@ export class Helicopter {
     }
 
     update() {
-
         // sync physics → graphics
         this.mesh.position.copy(this.body.position);
         this.mesh.quaternion.copy(this.body.quaternion);
 
+    }
+
+    hover() {
+        let deltaPos = this.desiredAltitude - this.body.position.y;
+        if (deltaPos > 0){
+            let liftForce = 20*deltaPos;
+            this.applyLift(liftForce);
+        }
     }
 
     applyLift(force = 40) {
@@ -58,6 +67,10 @@ export class Helicopter {
             this.body.position
         );
 
+    }
+
+    changeAltitude(deltaAltitude){
+        this.desiredAltitude += deltaAltitude;
     }
 
 }
