@@ -21,7 +21,7 @@ export class HelicopterController {
         // 🚁 LIFT
         if (this.input.isKeyDown("Space")) {
             // this.helicopter.applyLift(this.liftForce);
-            this.helicopter.changeAltitude(0.1);
+            this.helicopter.changeAltitude(0.05);
         }
 
         // 🚁 FORWARD / BACKWARD
