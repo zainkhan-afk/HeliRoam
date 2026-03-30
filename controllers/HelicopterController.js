@@ -23,6 +23,9 @@ export class HelicopterController {
             // this.helicopter.applyLift(this.liftForce);
             this.helicopter.changeAltitude(0.05);
         }
+        else{
+            
+        }
 
         // 🚁 FORWARD / BACKWARD
         if (this.input.isKeyDown("KeyW")) {
