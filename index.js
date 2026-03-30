@@ -50,7 +50,7 @@ function animate() {
     t += 0.01;
     stepPhysics(world);
     controller.update();
-    player.hover();
+    player.control();
     player.update();
     renderer.render(scene, camera);
 }

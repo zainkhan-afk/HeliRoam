@@ -1,11 +1,11 @@
 import * as THREE from "three";
 
-import * as CANNON from "https://cdn.skypack.dev/cannon-es";
+import * as CANNON from "cannon";
 
 class ObjectState{
     constructor(){
-        this.desiredRotation = new THREE.Vector3(0, 0, 0);
-        this.desiredPosition = new THREE.Vector3(0, 0, 0);
+        this.desiredRotation = new CANNON.Vec3(0, 0, 0);
+        this.desiredPosition = new CANNON.Vec3(0, 0, 0);
     }    
 }
 
@@ -15,6 +15,7 @@ export class Helicopter {
         this.scene = scene;
         this.desiredAltitude = 50;
         this.state = new ObjectState();
+        this.state.desiredPosition.z = this.desiredAltitude;
         this.world = world;
 
         this.mesh = this.createMesh();
@@ -72,6 +73,7 @@ export class Helicopter {
         });
 
         body.linearDamping = 0.4;
+        body.angularDamping = 0.9;
 
         return body;
     }
@@ -81,6 +83,20 @@ export class Helicopter {
         this.mesh.position.copy(this.body.position);
         this.mesh.quaternion.copy(this.body.quaternion);
 
+    }
+
+    control(){
+      let deltaPos = this.state.desiredPosition.vsub(this.body.position);
+      this.body.applyForce(
+            deltaPos,
+            this.body.position
+      );
+
+      let currentRotation = new CANNON.Vec3(0, 0, 0);
+      
+      this.body.quaternion.toEuler(currentRotation)
+      let deltaRot = this.state.desiredRotation.vsub(currentRotation);
+      this.body.angularVelocity = deltaRot;
     }
 
     hover() {

@@ -1,6 +1,7 @@
 // controllers/HelicopterController.js
 
-import * as CANNON from "https://cdn.skypack.dev/cannon-es";
+import * as CANNON from "cannon";
+
 
 export class HelicopterController {
 
@@ -27,24 +28,43 @@ export class HelicopterController {
             
         }
 
-        // 🚁 FORWARD / BACKWARD
+        // 🚁 ROTATION (X-axis)
         if (this.input.isKeyDown("KeyW")) {
-            body.applyForce(new CANNON.Vec3(0, 0, -this.moveForce), body.position);
+            // body.applyForce(new CANNON.Vec3(0, 0, -this.moveForce), body.position);
+            this.helicopter.state.desiredRotation.x = -Math.PI/4;
         }
 
-        if (this.input.isKeyDown("KeyS")) {
-            body.applyForce(new CANNON.Vec3(0, 0, this.moveForce), body.position);
+        else if (this.input.isKeyDown("KeyS")) {
+            // body.applyForce(new CANNON.Vec3(0, 0, this.moveForce), body.position);
+            this.helicopter.state.desiredRotation.x = Math.PI/4;
+        }
+        else{
+            this.helicopter.state.desiredRotation.x = 0;
         }
 
         // 🚁 ROTATION (Y-axis)
         if (this.input.isKeyDown("KeyA")) {
-            body.angularVelocity.y += this.turnTorque * 0.01;
+            this.helicopter.state.desiredRotation.y = -Math.PI/4;
+        }
+        else if (this.input.isKeyDown("KeyD")) {
+            this.helicopter.state.desiredRotation.y = Math.PI/4;
+        }else{
+            this.helicopter.state.desiredRotation.y = 0;
+        }
+        // 🔫 SHOOT (placeholder)
+        if (this.input.mouse.left) {
+            console.log("pew pew 🔫");
         }
 
-        if (this.input.isKeyDown("KeyD")) {
-            body.angularVelocity.y -= this.turnTorque * 0.01;
+        // 🚁 ROTATION (Z-axis)
+        if (this.input.isKeyDown("KeyQ")) {
+            this.helicopter.state.desiredRotation.z = -Math.PI/4;
         }
-
+        else if (this.input.isKeyDown("KeyE")) {
+            this.helicopter.state.desiredRotation.z = Math.PI/4;
+        }else{
+            this.helicopter.state.desiredRotation.z = 0;
+        }
         // 🔫 SHOOT (placeholder)
         if (this.input.mouse.left) {
             console.log("pew pew 🔫");
