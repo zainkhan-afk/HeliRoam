@@ -5,7 +5,7 @@ import * as CANNON from "cannon";
 class ObjectState{
     constructor(){
         this.desiredRotation = new CANNON.Vec3(0, 0, 0);
-        this.desiredPosition = new CANNON.Vec3(0, 0, 0);
+        this.desiredPosition = new CANNON.Vec3(0, 1, 0);
     }    
 }
 
@@ -64,7 +64,7 @@ export class Helicopter {
 
     createPhysicsBody() {
 
-        const shape = new CANNON.Box(new CANNON.Vec3(0.5,0.5,0.5));
+        const shape = new CANNON.Box(new CANNON.Vec3(15,15,15));
 
         const body = new CANNON.Body({
             mass: 1,
@@ -87,6 +87,8 @@ export class Helicopter {
 
     control(){
       let deltaPos = this.state.desiredPosition.vsub(this.body.position);
+      // deltaPos.x = 0.1;
+      let forcePos = new CANNON.Vec3(0, 0, 0);
       this.body.applyForce(
             deltaPos,
             this.body.position

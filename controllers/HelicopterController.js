@@ -22,7 +22,7 @@ export class HelicopterController {
         // 🚁 LIFT
         if (this.input.isKeyDown("Space")) {
             // this.helicopter.applyLift(this.liftForce);
-            this.helicopter.changeAltitude(0.05);
+            this.helicopter.changeAltitude(0.5);
         }
         else{
             
@@ -58,10 +58,10 @@ export class HelicopterController {
 
         // 🚁 ROTATION (Z-axis)
         if (this.input.isKeyDown("KeyQ")) {
-            this.helicopter.state.desiredRotation.z = -Math.PI/4;
+            this.helicopter.state.desiredRotation.z = Math.PI/4;
         }
         else if (this.input.isKeyDown("KeyE")) {
-            this.helicopter.state.desiredRotation.z = Math.PI/4;
+            this.helicopter.state.desiredRotation.z = -Math.PI/4;
         }else{
             this.helicopter.state.desiredRotation.z = 0;
         }
