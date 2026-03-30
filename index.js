@@ -3,20 +3,21 @@ import { Renderer } from "./core/renderer.js";
 import { Camera } from "./core/camera.js";
 import { DirectionalLight } from "./objects/DirectionalLight.js";
 import { player } from "./objects/Helicopter.js";
+import { ground } from "./objects/Ground.js";
+import { createScene } from "./core/scene.js"
 // import { map, initializeMap } from "./components/Map.js";
 // import { animateVehicles } from "./animateVehicles.js";
 // import "./collectUserInputs.js"
 // import { animatePlayer } from "./animatePlayer.js";
 
-const scene = new THREE.Scene();
+const scene = createScene();
 scene.add(player);
-// scene.add(map);
+scene.add(ground);
 
 const ambientLight = new THREE.AmbientLight();
 scene.add(ambientLight);
 
 const dirLight = DirectionalLight();
-dirLight.position.set(-100, -100, 200);
 scene.add(dirLight);
 
 const camera = Camera();

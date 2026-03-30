@@ -6,7 +6,7 @@ function Player() {
   const player = new THREE.Group();
 
   const body = new THREE.Mesh(
-    new THREE.BoxGeometry(15, 15, 20),
+    new THREE.BoxGeometry(15, 15, 15),
     new THREE.MeshLambertMaterial({
       color: "white",
       flatShading: true,

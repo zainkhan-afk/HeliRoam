@@ -1,13 +1,13 @@
 // scene.js
-import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+import * as THREE from "three";
 
 export function createScene() {
 
     const scene = new THREE.Scene();
 
-    scene.background = new THREE.Color(0x000000);
+    scene.background = new THREE.Color(0xffffff);
 
-    addLights(scene);
+    // addLights(scene);
 
     addHelpers(scene);
 
@@ -31,13 +31,13 @@ function addLights(scene) {
 
 
 function addHelpers(scene) {
-
-    const axes = new THREE.AxesHelper(5);
+    const axes = new THREE.AxesHelper(50);
 
     scene.add(axes);
 
-    const grid = new THREE.GridHelper(100, 100);
+    const grid = new THREE.GridHelper(500, 20);
+    grid.rotation.x = Math.PI / 2;
+    grid.position.z = 1;
 
     scene.add(grid);
-
 }
