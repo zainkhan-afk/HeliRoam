@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>ThreeJS Helicopter Cube</title>
-</head>
-<body>
-<script type="importmap">
-  {
-    "imports": {
-      "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
-      "jsm/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" type="text/css" href="./public/main.css"> -->
+    <script type="importmap">
+    {
+        "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+        "jsm/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+        }
     }
-  }
-</script>
-<script type="module" src="./index.js"></script>
-<!-- <script src="core/renderer.js"></script> -->
-<!-- <script src="core/physics.js"></script>
-<script src="core/scene.js"></script>
-<script src="core/camera.js"></script> -->
-</body>
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <canvas class="game"></canvas>
+    <div id="controls">
+      <div>
+        <button id="forward">▲</button>
+        <button id="left">◀</button>
+        <button id="backward">▼</button>
+        <button id="right">▶</button>
+      </div>
+    </div>
+    <script type="module" src="./index.js"></script>
+  </body>
 </html>

@@ -1,43 +1,40 @@
+import * as THREE from "three";
+import { Renderer } from "./core/renderer.js";
+import { Camera } from "./core/camera.js";
+import { DirectionalLight } from "./objects/DirectionalLight.js";
+import { player } from "./objects/Helicopter.js";
+// import { map, initializeMap } from "./components/Map.js";
+// import { animateVehicles } from "./animateVehicles.js";
+// import "./collectUserInputs.js"
+// import { animatePlayer } from "./animatePlayer.js";
 
-import { createRenderer, handleResize } from "./core/renderer.js";
-import { createPhysicsWorld, stepPhysics } from "./core/physics.js";
-import { createScene } from "./core/scene.js";
-import { createCamera } from "./core/camera.js";
-import { Helicopter } from "./objects/Helicopter.js";
+const scene = new THREE.Scene();
+scene.add(player);
+// scene.add(map);
 
-import { InputController } from "./controllers/InputController.js";
-import { HelicopterController } from "./controllers/HelicopterController.js";
+const ambientLight = new THREE.AmbientLight();
+scene.add(ambientLight);
 
-import { OrbitControls} from "jsm/controls/OrbitControls.js"
+const dirLight = DirectionalLight();
+dirLight.position.set(-100, -100, 200);
+scene.add(dirLight);
 
-const renderer = createRenderer();
-const scene = createScene();
-const physics = createPhysicsWorld();
-const camera  = createCamera();
+const camera = Camera();
+scene.add(camera);
 
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.03;
-const helicopter = new Helicopter(scene, physics);
+initializeGame();
 
-const input = new InputController();
-const heliController = new HelicopterController(helicopter, input);
-
-let lifting = false;
-
-window.addEventListener("mousedown", () => lifting = true);
-window.addEventListener("mouseup", () => lifting = false);
-let t = 0;
-function animate(){
-    requestAnimationFrame(animate);
-    heliController.update();
-    helicopter.hover();
-    stepPhysics(physics);
-    helicopter.update();
-    renderer.render(scene, camera);
-    controls.update();
-
-    t += 0.01;
+function initializeGame() {
+//   initializeMap();
 }
 
-animate();
+const renderer = Renderer();
+// renderer.render(scene, camera);
+renderer.setAnimationLoop(animate);
+
+function animate() {
+    // animateVehicles();
+    // animatePlayer();
+
+    renderer.render(scene, camera);
+}

@@ -1,32 +1,18 @@
 // renderer.js
 import * as THREE from "three";
 
-export function createRenderer() {
-
-    const renderer = new THREE.WebGLRenderer({
-        antialias: true
-    });
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
-    renderer.setPixelRatio(window.devicePixelRatio);
-
-    document.body.appendChild(renderer.domElement);
-
-    return renderer;
-}
-
-
-export function handleResize(renderer, camera) {
-
-    window.addEventListener("resize", () => {
-
-        camera.aspect = window.innerWidth / window.innerHeight;
-
-        camera.updateProjectionMatrix();
-
-        renderer.setSize(window.innerWidth, window.innerHeight);
-
-    });
-
+export function Renderer() {
+    const canvas = document.querySelector("canvas.game");
+      if (!canvas) throw new Error("Canvas not found");
+    
+      const renderer = new THREE.WebGLRenderer({
+        alpha: true,
+        antialias: true,
+        canvas: canvas,
+      });
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.shadowMap.enabled = true;
+    
+      return renderer;
 }
