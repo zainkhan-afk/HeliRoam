@@ -67,7 +67,7 @@ export class HelicopterController {
         }
         // 🔫 SHOOT (placeholder)
         if (this.input.mouse.left) {
-            console.log("pew pew 🔫");
+            // console.log("pew pew 🔫");
         }
     }
 
