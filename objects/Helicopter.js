@@ -92,7 +92,7 @@ export class Helicopter {
         let forceMag = this.desiredAltitude - this.body.position.z;
         let thrustForce = new CANNON.Vec3(0, 0, forceMag);
         // let movementForce = currentRotation.length()? new CANNON.Vec3(0, 100*Math.sin(currentRotation.x), 0) : new CANNON.Vec3(0, 0, 0);
-        let movementForce = new CANNON.Vec3(0, -100*Math.sin(currentRotation.x), 0);
+        let movementForce = new CANNON.Vec3(0, -50*Math.sin(currentRotation.x), 0);
         thrustForce = thrustForce.vadd(movementForce);
         // thrustForce += movementForce;
         // console.log("\nmovementForce", movementForce);

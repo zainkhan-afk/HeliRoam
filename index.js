@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { Renderer } from "./core/renderer.js";
-import { Camera } from "./core/camera.js";
+import { Camera, UpdateCameraPos } from "./core/camera.js";
 import { DirectionalLight } from "./objects/DirectionalLight.js";
 import { Helicopter } from "./objects/Helicopter.js";
 import { ground } from "./objects/Ground.js";
@@ -52,5 +52,6 @@ function animate() {
     controller.update();
     player.control();
     player.update();
+    UpdateCameraPos(camera, player.mesh);
     renderer.render(scene, camera);
 }
