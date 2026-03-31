@@ -35,9 +35,9 @@ function addHelpers(scene) {
 
     scene.add(axes);
 
-    const grid = new THREE.GridHelper(500, 20);
-    grid.rotation.x = Math.PI / 2;
-    grid.position.z = 1;
+    // const grid = new THREE.GridHelper(500, 20);
+    // grid.rotation.x = Math.PI / 2;
+    // grid.position.z = 1;
 
-    scene.add(grid);
+    // scene.add(grid);
 }

@@ -24,7 +24,7 @@ export function Camera(){
 
 
 export function UpdateCameraPos(camera, player){
-    camera.position.set(player.position.x + 300, player.position.y - 300, 300);
+    camera.position.set(player.position.x + 300, player.position.y - 300, player.position.z + 300);
     camera.lookAt(player.position.x, player.position.y, player.position.z);
 }
 
