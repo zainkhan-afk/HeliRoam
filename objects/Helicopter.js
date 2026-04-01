@@ -73,7 +73,7 @@ export class Helicopter {
         });
 
         body.linearDamping = 0.4;
-        body.angularDamping = 0.9;
+        // body.angularDamping = 0.9;
 
         return body;
     }
@@ -94,7 +94,8 @@ export class Helicopter {
         // let movementForce = currentRotation.length()? new CANNON.Vec3(0, 100*Math.sin(currentRotation.x), 0) : new CANNON.Vec3(0, 0, 0);
         let movementForce = new CANNON.Vec3(0, -50*Math.sin(currentRotation.x), 0);
         thrustForce = thrustForce.vadd(movementForce);
-        // thrustForce += movementForce;
+        
+        console.log("currentRotation.x", currentRotation.x);
         // console.log("\nmovementForce", movementForce);
         // console.log("currentRotation", currentRotation, currentRotation.length());
         // console.log(currentRotation.length() ? "EXISTS" : "DOES NOT EXIST")\

@@ -50,7 +50,6 @@ function animate() {
     t += 0.01;
     stepPhysics(world);
     controller.update();
-    player.control();
     player.update();
     UpdateCameraPos(camera, player.mesh);
     renderer.render(scene, camera);
