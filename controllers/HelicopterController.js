@@ -36,25 +36,25 @@ export class HelicopterController {
         // 🚁 ROTATION (X-axis)
         if (this.input.isKeyDown("KeyW")) {
             // body.applyForce(new CANNON.Vec3(0, 0, -this.moveForce), body.position);
-            this.helicopter.state.desiredRotation.x = -Math.PI/4;
+            this.helicopter.desiredState.rotation.x = -Math.PI/4;
         }
 
         else if (this.input.isKeyDown("KeyS")) {
             // body.applyForce(new CANNON.Vec3(0, 0, this.moveForce), body.position);
-            this.helicopter.state.desiredRotation.x = Math.PI/4;
+            this.helicopter.desiredState.rotation.x = Math.PI/4;
         }
         else{
-            this.helicopter.state.desiredRotation.x = 0;
+            this.helicopter.desiredState.rotation.x = 0;
         }
 
         // 🚁 ROTATION (Y-axis)
         if (this.input.isKeyDown("KeyA")) {
-            this.helicopter.state.desiredRotation.y = -Math.PI/4;
+            this.helicopter.desiredState.rotation.y = -Math.PI/4;
         }
         else if (this.input.isKeyDown("KeyD")) {
-            this.helicopter.state.desiredRotation.y = Math.PI/4;
+            this.helicopter.desiredState.rotation.y = Math.PI/4;
         }else{
-            this.helicopter.state.desiredRotation.y = 0;
+            this.helicopter.desiredState.rotation.y = 0;
         }
         // 🔫 SHOOT (placeholder)
         if (this.input.mouse.left) {
@@ -63,12 +63,12 @@ export class HelicopterController {
 
         // 🚁 ROTATION (Z-axis)
         if (this.input.isKeyDown("KeyQ")) {
-            this.helicopter.state.desiredRotation.z = Math.PI/4;
+            this.helicopter.desiredState.rotation.z = Math.PI/4;
         }
         else if (this.input.isKeyDown("KeyE")) {
-            this.helicopter.state.desiredRotation.z = -Math.PI/4;
+            this.helicopter.desiredState.rotation.z = -Math.PI/4;
         }else{
-            this.helicopter.state.desiredRotation.z = 0;
+            this.helicopter.desiredState.rotation.z = 0;
         }
 
         this.applyControls();
@@ -76,10 +76,9 @@ export class HelicopterController {
 
 
     angularControl() {
-        let currentRotation = new CANNON.Vec3(0, 0, 0);
-        this.helicopter.body.quaternion.toEuler(currentRotation)
-        let error = this.helicopter.state.desiredRotation.vsub(currentRotation);
-        console.log("this.helicopter.state.desiredRotation", this.helicopter.state.desiredRotation);
+        // let currentRotation = new CANNON.Vec3(0, 0, 0);
+        // this.helicopter.body.quaternion.toEuler(currentRotation)
+        let error = this.helicopter.desiredState.rotation.vsub(this.helicopter.state.rotation);
         
         // if (error.length() > 0.3){
         //     this.helicopter.body.angularVelocity = error.scale(this.angularK).vadd(error.vsub(this.prevError).scale(this.angularD)).vadd(this.errorSum.scale(this.angularI));
