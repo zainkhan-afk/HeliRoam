@@ -14,9 +14,9 @@ export class HelicopterController {
         this.moveForce = 1;
         this.turnTorque = 5;
 
-        this.angularK = 3;
-        this.angularD = 1;
-        this.angularI = 0.01;
+        this.angularK = 10;
+        this.angularD = 0;
+        this.angularI = 0;
         this.prevError = new CANNON.Vec3(0, 0, 0);
         this.errorSum = new CANNON.Vec3(0, 0, 0);
     }
@@ -79,15 +79,16 @@ export class HelicopterController {
         let currentRotation = new CANNON.Vec3(0, 0, 0);
         this.helicopter.body.quaternion.toEuler(currentRotation)
         let error = this.helicopter.state.desiredRotation.vsub(currentRotation);
-        // console.log("error", error);
-        // this.helicopter.body.angularVelocity = error.scale(this.angularK).vadd(error.vsub(this.prevError).scale(this.angularD));
-        this.helicopter.body.angularVelocity = error.scale(this.angularK).vadd(error.vsub(this.prevError).scale(this.angularD)).vadd(this.errorSum.scale(this.angularI));
-        // console.log("--------------------");
-        // console.log(error);
-        // console.log(error.vsub(this.prevError));
+        console.log("this.helicopter.state.desiredRotation", this.helicopter.state.desiredRotation);
+        
+        // if (error.length() > 0.3){
+        //     this.helicopter.body.angularVelocity = error.scale(this.angularK).vadd(error.vsub(this.prevError).scale(this.angularD)).vadd(this.errorSum.scale(this.angularI));
+        // }
+
+        this.helicopter.body.angularVelocity = error.scale(this.angularK).vadd(error.vsub(this.prevError).scale(this.angularD));
+
         this.prevError = error;
         this.errorSum.vadd(error);
-
     }
 
     linearControl() {
@@ -100,7 +101,8 @@ export class HelicopterController {
         
         let movementForce = new CANNON.Vec3(0, -50*Math.sin(currentRotation.x), 0);
         thrustForce = thrustForce.vadd(movementForce);
-        console.log("\nmovementForce", thrustForce);
+        // console.log("\nmovementForce", thrustForce);
+        // console.log("currentRotation.x", currentRotation.x);
         
         this.helicopter.body.applyForce(
             thrustForce,
@@ -111,10 +113,6 @@ export class HelicopterController {
     applyControls() {
         this.angularControl();
         this.linearControl();
-        // this.helicopter.control();
-        // let currentRotation = new CANNON.Vec3(0, 0, 0);
-        // this.helicopter.body.quaternion.toEuler(currentRotation)
-        // console.log(currentRotation);
     }
 
 }
