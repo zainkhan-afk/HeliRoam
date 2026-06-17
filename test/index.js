@@ -24,6 +24,7 @@ function DirectionalLight() {
 
 const w = window.innerWidth;
 const h = window.innerHeight;
+const desiredAltitude = 2;
 
 const renderer = new THREE.WebGLRenderer({ antialias: true});
 renderer.setSize(w, h);
@@ -37,9 +38,9 @@ const far = 100;
 
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 
-camera.position.z = 2;
-camera.position.x = 10;
-camera.position.x = 10;
+camera.position.z = 7;
+camera.position.x = 5;
+camera.position.y = 5;
 
 camera.up.set(0, 0, 1);
 camera.lookAt(0, 0, 0);
@@ -47,7 +48,7 @@ camera.lookAt(0, 0, 0);
 const scene = new THREE.Scene();
 const world = new CANNON.World();
 
-// world.gravity.set(0, 0, -9.82);
+world.gravity.set(0, 0, -9.82);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
@@ -92,9 +93,6 @@ scene.add(dirLight);
 // const wireMesh = new THREE.Mesh(geo, wireMat);
 // mesh.add(wireMesh);
 
-body.angularVelocity = new CANNON.Vec3(0.1, 0, 0);
-// body.torque = new CANNON.Vec3(10, 0, 10);
-
 const keys = {
     w: false,
     a: false,
@@ -116,16 +114,29 @@ window.addEventListener("keyup", (e) => {
     }
 });
 
+// body.velocity.y = -1;
+
 function animate(t = 0){
     requestAnimationFrame(animate);
-    // mesh.scale.setScalar(Math.cos(t*0.001)/2 + 1.0);
-    // geo.rotateZ(0.01);
     mesh.position.copy(body.position);
     mesh.quaternion.copy(body.quaternion);
+
+    let desiredAngularVel = keys['w'] ? Math.PI/4 : keys['s'] ? -Math.PI/4 : 0;
+    let currentRot = new CANNON.Vec3(0, 0, 0);
+    body.quaternion.toEuler(currentRot);
+    
+    let rotErr = desiredAngularVel - currentRot.x;
+    body.angularVelocity = new CANNON.Vec3(10*rotErr, 0, 0);
+
+
+    let err = desiredAltitude - body.position.z;
+    let forceAlt = 10*err;
+    let thrustForce = new CANNON.Vec3(0, -forceAlt*Math.sin(currentRot.x), forceAlt*Math.cos(currentRot.x));
+    body.force = thrustForce;
     
     renderer.render(scene, camera);
     controls.update();
-    world.step(0.1);
+    world.step(0.01);
     
     t += 1
 }
