@@ -60,8 +60,8 @@ const body = new CANNON.Body({
     position: new CANNON.Vec3(0,0,1)
 });
 
-// body.linearDamping = 0.4;
-// body.angularDamping = 0.9;
+body.linearDamping = 0.9;
+body.angularDamping = 0.9;
 
 const geo = new THREE.BoxGeometry(1, 1, 1);
 const mat = new THREE.MeshLambertMaterial({
@@ -126,7 +126,7 @@ function animate(t = 0){
     body.quaternion.toEuler(currentRot);
     
     let rotErr = desiredAngularVel - currentRot.x;
-    body.angularVelocity = new CANNON.Vec3(10*rotErr, 0, 0);
+    body.angularVelocity = new CANNON.Vec3(5*rotErr, 0, 0);
 
 
     let err = desiredAltitude - body.position.z;
