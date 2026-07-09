@@ -95,44 +95,28 @@ export class Helicopter {
     }
 
     control(){        
-        let forceMag = this.desiredAltitude - this.body.position.z;
-        let thrustForce = new CANNON.Vec3(0, 0, forceMag);
-        // let movementForce = currentRotation.length()? new CANNON.Vec3(0, 100*Math.sin(currentRotation.x), 0) : new CANNON.Vec3(0, 0, 0);
-        let movementForce = new CANNON.Vec3(0, -50*Math.sin(this.state.rotation.x), 0);
-        thrustForce = thrustForce.vadd(movementForce);
+        // let forceMag = this.desiredAltitude - this.body.position.z;
+        // let thrustForce = new CANNON.Vec3(0, 0, forceMag);
+        // // let movementForce = currentRotation.length()? new CANNON.Vec3(0, 100*Math.sin(currentRotation.x), 0) : new CANNON.Vec3(0, 0, 0);
+        // let movementForce = new CANNON.Vec3(0, -50*Math.sin(this.state.rotation.x), 0);
+        // thrustForce = thrustForce.vadd(movementForce);
         
-        console.log("currentRotation.x", this.state.rotation.x);
-        // console.log("\nmovementForce", movementForce);
-        // console.log("currentRotation", currentRotation, currentRotation.length());
-        // console.log(currentRotation.length() ? "EXISTS" : "DOES NOT EXIST")\
+        // console.log("currentRotation.x", this.state.rotation.x);
+        // // console.log("\nmovementForce", movementForce);
+        // // console.log("currentRotation", currentRotation, currentRotation.length());
+        // // console.log(currentRotation.length() ? "EXISTS" : "DOES NOT EXIST")\
         
-        let forcePos = new CANNON.Vec3(0, 0, 0);
-        this.body.applyForce(
-            thrustForce,
-            this.body.position
-        );
+        // let forcePos = new CANNON.Vec3(0, 0, 0);
+        // this.body.applyForce(
+        //     thrustForce,
+        //     this.body.position
+        // );
 
 
-        let deltaRot = this.state.rotation.vsub(this.desiredState.rotation);
-        this.body.angularVelocity = deltaRot;
+        // let deltaRot = this.state.rotation.vsub(this.desiredState.rotation);
+        // this.body.angularVelocity = deltaRot;
       
     }
-
-    // hover() {
-    //     let deltaPos = this.desiredAltitude - this.body.position.z;
-    //     if (deltaPos > 0){
-    //         let liftForce = 1*deltaPos;
-    //         this.applyLift(liftForce);
-    //     }
-    // }
-
-    // applyLift(force = 40) {
-    //     this.body.applyForce(
-    //         new CANNON.Vec3(0, 0, force),
-    //         this.body.position
-    //     );
-
-    // }
 
     changeAltitude(deltaAltitude){
         this.desiredAltitude += deltaAltitude;

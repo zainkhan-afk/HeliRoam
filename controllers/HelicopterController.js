@@ -19,6 +19,7 @@ export class HelicopterController {
         this.angularI = 0;
         this.prevError = new CANNON.Vec3(0, 0, 0);
         this.errorSum = new CANNON.Vec3(0, 0, 0);
+        this.test_val = 0.01;
     }
 
     update() {
@@ -98,19 +99,20 @@ export class HelicopterController {
         let thrustForce = new CANNON.Vec3(0, 0, forceMag);
         // console.log("currentRotation.x", currentRotation.x);
         
-        let movementForce = new CANNON.Vec3(0, -50*Math.sin(currentRotation.x), 0);
+        let movementForce = new CANNON.Vec3(0, -50*Math.sin(this.test_val), 0);
         thrustForce = thrustForce.vadd(movementForce);
-        // console.log("\nmovementForce", thrustForce);
-        // console.log("currentRotation.x", currentRotation.x);
+        console.log("\nmovementForce", movementForce);
+        console.log("currentRotation.x", currentRotation.x);
         
         this.helicopter.body.applyForce(
             thrustForce,
             this.helicopter.body.position
         );
+        this.test_val = 0;
     }
 
     applyControls() {
-        this.angularControl();
+        // this.angularControl();
         this.linearControl();
     }
 
