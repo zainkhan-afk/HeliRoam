@@ -96,12 +96,13 @@ export class HelicopterController {
         this.helicopter.body.quaternion.toEuler(currentRotation)
         
         let forceMag = this.helicopter.desiredAltitude - this.helicopter.body.position.z;
-        let thrustForce = new CANNON.Vec3(0, 0, forceMag);
-        // console.log("currentRotation.x", currentRotation.x);
+        // let thrustForce = new CANNON.Vec3(0, 0, forceMag);
+        // // console.log("currentRotation.x", currentRotation.x);
         
+        let thrustForce = new CANNON.Vec3(0, -forceMag*Math.sin(currentRotation.x), forceMag*Math.cos(currentRotation.x));
         let movementForce = new CANNON.Vec3(0, -50*Math.sin(this.test_val), 0);
         thrustForce = thrustForce.vadd(movementForce);
-        console.log("\nmovementForce", movementForce);
+        // console.log("\nmovementForce", movementForce);
         console.log("currentRotation.x", currentRotation.x);
         
         this.helicopter.body.applyForce(
@@ -112,7 +113,7 @@ export class HelicopterController {
     }
 
     applyControls() {
-        // this.angularControl();
+        this.angularControl();
         this.linearControl();
     }
 
